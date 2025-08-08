@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - '8080:8080'
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      RAZORPAY_KEY: ${RAZORPAY_KEY}
+      RAZORPAY_SECRET: ${RAZORPAY_SECRET}
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/relife
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: relife
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - redis
+      - db
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: relife
+      MYSQL_DATABASE: relife
+    ports:
+      - '3306:3306'
