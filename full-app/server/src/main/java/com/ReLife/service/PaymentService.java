@@ -37,7 +37,7 @@ public class PaymentService {
     private final String razorpaySecret;
     private final ObjectMapper mapper = new ObjectMapper();
 
-    public PaymentService(@Value("${RAZORPAY_KEY}") String key,@Value("${RAZORPAY_SECRET}") String secret) throws Exception {
+    public PaymentService(@Value("${razorpay.key}") String key,@Value("${razorpay.secret}") String secret) throws Exception {
         this.razorpay     = new RazorpayClient(key, secret);
         this.razorpayKey   = key;
         this.razorpaySecret= secret;
