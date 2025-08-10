@@ -5,6 +5,7 @@ EPR compliance platform
 
 Live-link: [https://relife-ecycle.netlify.app/]
 
+> Note: The backend instance will spin down with inactivity, which can delay requests by 50 seconds or more.
 
 AI agent to assist users.
 
@@ -26,6 +27,7 @@ Swagger: [https://relife-y0xi.onrender.com/swagger-ui/index.html]
 - Server: [Render](https://render.com/)
 - Client: [Netlify](https://relife-ecycle.netlify.app/)
 - Database: [Aiven](aiven.io/)
+
 
 
 
