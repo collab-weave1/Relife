@@ -17,8 +17,11 @@ Backend: Spring boot, MySQL, Redis, Docker, Swagger, Sonacloud
 
 Payment Gateway: Razorpay
 
+Swagger: [http://localhost:8080/swagger-ui/index.html]
+
 ## Deployment: 
 - Server: [Render](https://render.com/)
 - Client: [Netlify](https://relife-ecycle.netlify.app/)
 - Database: [Aiven](aiven.io/)
+
 
