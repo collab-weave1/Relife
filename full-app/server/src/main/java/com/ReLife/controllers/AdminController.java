@@ -1,6 +1,7 @@
 package com.ReLife.controllers;
 
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +11,9 @@ import com.ReLife.service.AdminService;
 
 @RestController
 @RequestMapping("/api/admin")
+@CrossOrigin(originPatterns = "*")
 public class AdminController {
+
     private final AdminService service;
     public AdminController(AdminService service) { this.service = service; }
 

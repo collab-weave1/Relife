@@ -1,24 +1,28 @@
 package com.ReLife.controllers;
 
-import com.ReLife.dto.PaymentDto;
-import com.ReLife.service.PaymentService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.razorpay.Payment;
-import com.razorpay.RazorpayException;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import com.ReLife.dto.PaymentDto;
+import com.ReLife.service.PaymentService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.razorpay.Payment;
+import com.razorpay.RazorpayException;
 
 @RestController
 @RequestMapping("/api/payment")
-@CrossOrigin(originPatterns = "*") // change as per requirement in production
+@CrossOrigin(originPatterns = "*")
 public class PaymentController {
     private static final String WEBHOOK_PROCESSING_FAILED = "Webhook processing failed";
 	private static final String OK = "ok";
