@@ -1,5 +1,8 @@
 package com.ReLife.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
 import org.springframework.stereotype.Service;
@@ -7,18 +10,15 @@ import org.springframework.stereotype.Service;
 import com.ReLife.dto.PickupRequestDto;
 import com.ReLife.mapper.PickupMapper;
 import com.ReLife.model.Pickup;
-import com.ReLife.repository.PickupRequestRepository;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import com.ReLife.repository.PickupRepository;
 
 @Service
 public class PickupService {
   private static final String SCHEDULED = "Scheduled";
-private final PickupRequestRepository repo;
+  private final PickupRepository repo;
   private final PickupMapper mapper;
 
-  public PickupService(PickupRequestRepository repo, PickupMapper mapper) {
+  public PickupService(PickupRepository repo, PickupMapper mapper) {
     this.repo = repo;
     this.mapper = mapper;
   }
