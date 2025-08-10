@@ -11,3 +11,13 @@ Sonarcloud for realtime comprehensive scanning of code to identify vulnerabiliti
 
 Three roles: User, Recycler, Producer
 
+Frontend: React, Vite, ml5.js(in-browser AI), tesseract.js(ocr), howler.js(soud library)
+
+Backend: Spring boot, MySQL, Redis, Docker, Swagger, Sonacloud
+
+Payment Gateway: Razorpay
+
+## Deployment: 
+- Server: (Render)[https://render.com/]
+- Client: (Netlify)[https://relife-ecycle.netlify.app/]
+- Database: (Aivem)
