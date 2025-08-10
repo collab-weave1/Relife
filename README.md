@@ -1,7 +1,10 @@
 # Relife
+EPR compliance platform
+
+---
+
 Live-link: [https://relife-ecycle.netlify.app/]
 
-EPR compliance platform
 
 AI agent to assist users.
 
@@ -23,5 +26,6 @@ Swagger: [https://relife-y0xi.onrender.com/swagger-ui/index.html]
 - Server: [Render](https://render.com/)
 - Client: [Netlify](https://relife-ecycle.netlify.app/)
 - Database: [Aiven](aiven.io/)
+
 
 
