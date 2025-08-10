@@ -3,7 +3,9 @@ EPR compliance platform
 
 ---
 
-Live-link: [https://relife-ecycle.netlify.app/]
+MVP-link: [https://relife-ecycle.netlify.app/]
+
+Live-link: [https://relife-ecycle-live.netlify.app/]
 
 > Note: The backend instance will spin down with inactivity, which can delay requests by 50 seconds or more.
 
@@ -27,6 +29,7 @@ Swagger: [https://relife-y0xi.onrender.com/swagger-ui/index.html]
 - Server: [Render](https://render.com/)
 - Client: [Netlify](https://relife-ecycle.netlify.app/)
 - Database: [Aiven](aiven.io/)
+
 
 
 
