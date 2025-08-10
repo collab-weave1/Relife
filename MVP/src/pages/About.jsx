@@ -1,7 +1,8 @@
 import { ArrowRight, Globe, Sprout, Target, Users, Zap, Heart, TreePine, Recycle, Shield, Award } from "lucide-react";
 import { LayoutWrapper } from "../style-components/LayoutWrapper";
+import { useNavigate } from "react-router-dom";
 
-export const About = ({ onNavigate, isDark }) => {
+export const About = ({ isDark }) => {
     const teamMembers = [
         {
             name: 'Nevin Mathew',
@@ -73,6 +74,8 @@ export const About = ({ onNavigate, isDark }) => {
             gradient: 'from-emerald-500 to-teal-500'
         }
     ];
+
+    const onNavigate = useNavigate()
 
     return (
         <LayoutWrapper isDark={isDark}>
@@ -256,7 +259,7 @@ export const About = ({ onNavigate, isDark }) => {
                             </div>
                             <div className="flex items-center justify-center mx-auto">
                                 <button
-                                    onClick={() => onNavigate('donate')}
+                                    onClick={() => onNavigate('/donate')}
                                     className="group/btn inline-flex items-center justify-center gap-2 my-8 bg-indigo-500/70 hover:bg-indigo-500/80 backdrop-blur-sm px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105"
                                 >
                                     <span>Support Now</span>
@@ -280,7 +283,7 @@ export const About = ({ onNavigate, isDark }) => {
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                             <button
-                                onClick={() => onNavigate('login')}
+                                onClick={() => onNavigate('/login')}
                                 className="group bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold px-10 py-4 rounded-full hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-lg flex items-center gap-3"
                             >
                                 Start Your Journey

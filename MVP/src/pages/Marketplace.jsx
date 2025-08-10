@@ -1,5 +1,6 @@
 import { PlusCircle, ShoppingCart } from "lucide-react"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const initialProducts = [
   {
@@ -34,7 +35,7 @@ const initialProducts = [
   },
 ]
 
-export const Marketplace = ({ onLogout, onBack, currentUser, isDark }) => {
+export const Marketplace = ({ onLogout, onBack, role, isDark }) => {
   const [products, setProducts] = useState(initialProducts)
   const [formData, setFormData] = useState({
     name: "",
@@ -42,9 +43,11 @@ export const Marketplace = ({ onLogout, onBack, currentUser, isDark }) => {
     condition: "Good",
     warranty: "3 months",
     image: null,
-    sellerType: currentUser.role,
+    sellerType: role,
   })
   const [showAddForm, setShowAddForm] = useState(false)
+
+  const onNavigate = useNavigate()
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -70,7 +73,7 @@ export const Marketplace = ({ onLogout, onBack, currentUser, isDark }) => {
         condition: "Good",
         warranty: "3 months",
         image: null,
-        sellerType: currentUser.role,
+        sellerType: role,
       })
       setShowAddForm(false)
     }
@@ -177,7 +180,7 @@ export const Marketplace = ({ onLogout, onBack, currentUser, isDark }) => {
           ))}
         </div>
 
-        {(currentUser.role === "recycler" || currentUser.role === "admin") && (
+        {(role === "recycler" || role === "producer") && (
           <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-100 dark:border-gray-700">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">

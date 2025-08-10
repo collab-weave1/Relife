@@ -8,6 +8,7 @@ import InteractiveEarth from '../style-components/InteractiveEarth';
 import SplitText from '../style-components/SplitText';
 import { FadeInText, TypewriterText } from '../style-components/TextReveal';
 import { LayoutWrapper } from '../style-components/LayoutWrapper';
+import { useNavigate } from 'react-router-dom';
 
 const LoadingScreen = ({ loading }) => {
     return (
@@ -164,7 +165,9 @@ const LoadingScreen = ({ loading }) => {
     );
 };
 
-export const Home = ({ onNavigate, isDark }) => {
+export const Home = ({ isDark }) => {
+
+    const onNavigate = useNavigate()
 
     const [loading, setLoading] = useState(true);
     
@@ -236,7 +239,7 @@ export const Home = ({ onNavigate, isDark }) => {
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                             <button
-                                onClick={() => onNavigate('login')}
+                                onClick={() => onNavigate('/login')}
                                 className="group bg-white text-green-600 font-bold px-8 py-4 rounded-full hover:bg-green-50 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2"
                             >
                                 Get Started with Relife
@@ -244,7 +247,7 @@ export const Home = ({ onNavigate, isDark }) => {
                             </button>
 
                             <button 
-                                onClick={() => onNavigate('about')}
+                                onClick={() => onNavigate('/about')}
                                 className="text-white font-medium px-6 py-4 rounded-full border-2 border-white/30 hover:bg-white/10 transition-all duration-300">
                                 Learn More
                             </button>
@@ -449,7 +452,7 @@ export const Home = ({ onNavigate, isDark }) => {
                             </p>
 
                             <button
-                                onClick={() => onNavigate('login')}
+                                onClick={() => onNavigate('/login')}
                                 className="group bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold px-10 py-4 rounded-full hover:from-green-700 hover:to-emerald-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-lg flex items-center gap-3 mx-auto"
                             >
                                 Get Started with ReLife

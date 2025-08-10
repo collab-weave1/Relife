@@ -1,20 +1,24 @@
 import { useCallback, useEffect, useState } from "react"
-import { fetchAdminStats } from "../api/adminData"
+import { useNavigate } from "react-router-dom"
+import { ArrowRight, BarChart3, Download, Package, Smartphone, Sprout, Users } from "lucide-react"
 import { SectionHeading } from "../components/SectionHeading"
 import { StatChart } from "../components/StatChart"
 import { ExportButtons } from "../components/ExportButtons"
-import { ArrowRight, BarChart3, Download, Package, Smartphone, Sprout, Users } from "lucide-react"
+import { fetchAdminStats } from "../api"
 
-export const AdminDashboard = ({ onLogout, onNavigate, isDark }) => {
+export const AdminDashboard = ({ onLogout, isDark }) => {
   const [stats, setStats] = useState(null)
   const [loading, setLoading] = useState(true)
 
+  const onNavigate = useNavigate()
+
   const setAdminStats = useCallback(() => {
-    fetchAdminStats().then((data) => {
-      setStats(data)
+    fetchAdminStats().then((stats) => {
+      console.log(stats)
+      setStats(stats.message)
       setLoading(false)
     })
-  })
+  },[])
 
   useEffect(() => {
     setAdminStats()
@@ -22,12 +26,12 @@ export const AdminDashboard = ({ onLogout, onNavigate, isDark }) => {
 
   const reportData = stats
     ? [
-      { metric: "Total E-Waste Collected", value: stats.eWasteCollected },
-      { metric: "EPR Reports Logged", value: stats.eprReports },
-      { metric: "Registered Recyclers", value: stats.recyclers },
-      { metric: "User Engagement", value: stats.users },
-      { metric: "CO₂ Saved", value: stats.co2Saved },
-      { metric: "Refurbished Devices Sold", value: stats.refurbishedSold },
+      { metric: "Total E-Waste Collected", value: stats.totalWeight },
+      { metric: "EPR Reports Logged", value: stats.totalBrands },
+      { metric: "Registered Recyclers", value: stats.totalRecyclers },
+      { metric: "User Engagement", value: stats.totalUsers },
+      { metric: "CO₂ Saved", value: stats.totalCO2Saved },
+      { metric: "Refurbished Devices Sold", value: stats.totalMarketplaceItems },
     ]
     : []
 
@@ -54,32 +58,32 @@ export const AdminDashboard = ({ onLogout, onNavigate, isDark }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             <AdminCard
               title="Total E-Waste Collected"
-              stat={stats.eWasteCollected}
+              stat={stats.totalWeight}
               icon={<Package className="w-5 h-5 mr-2" />}
               color="bg-teal-600"
             />
             <AdminCard
               title="EPR Reports Logged"
-              stat={stats.eprReports}
+              stat={stats.totalBrands}
               icon={<BarChart3 className="w-5 h-5 mr-2" />}
               color="bg-cyan-600"
             />
-            <AdminCard title="Registered Recyclers" stat={stats.recyclers} icon="♻️" color="bg-pink-600" />
+            <AdminCard title="Registered Recyclers" stat={stats.totalRecyclers} icon="♻️" color="bg-pink-600" />
             <AdminCard
               title="User Engagement"
-              stat={stats.users}
+              stat={stats.totalUsers}
               icon={<Users className="w-5 h-5 mr-2" />}
               color="bg-red-600"
             />
             <AdminCard
               title="CO₂ Saved"
-              stat={stats.co2Saved}
+              stat={stats.totalCO2Saved}
               icon={<Sprout className="w-5 h-5 mr-2" />}
               color="bg-emerald-600"
             />
             <AdminCard
               title="Refurbished Devices Sold"
-              stat={stats.refurbishedSold}
+              stat={stats.totalMarketplaceItems}
               icon={<Smartphone className="w-5 h-5 mr-2" />}
               color="bg-purple-600"
             />
@@ -103,7 +107,7 @@ export const AdminDashboard = ({ onLogout, onNavigate, isDark }) => {
 
           <div className="mt-8 text-center">
             <button
-              onClick={() => onNavigate('donate')}
+              onClick={() => onNavigate('/donate')}
               className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-full transition"
             >
               Support Our NGOs

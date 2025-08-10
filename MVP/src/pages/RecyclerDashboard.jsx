@@ -1,49 +1,73 @@
 import { Calendar, Clipboard, Clock, DollarSign, Laptop, MapPin, Settings, Smartphone, Truck, Tv, Lock, Battery, Lightbulb, Link2 } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { fetchRecyclerData } from "../api"
 
-export const RecyclerDashboard = ({ onNavigate, isDark }) => {
-  const [requests] = useState([
-    {
-      id: 1,
-      device: "Smart TV",
-      brand: "Samsung",
-      status: "Waiting",
-      submittedDate: "2024-06-15",
-      value: 2800,
-      location: "Koramangala",
-    },
-    {
-      id: 2,
-      device: "Laptop",
-      brand: "Dell",
-      status: "In Progress",
-      submittedDate: "2024-06-18",
-      value: 3200,
-      location: "Whitefield",
-    },
-    {
-      id: 3,
-      device: "iPhone",
-      brand: "Apple",
-      status: "Completed",
-      submittedDate: "2024-06-20",
-      value: 1500,
-      location: "Indiranagar",
-    },
-    {
-      id: 4,
-      device: "Tablet",
-      brand: "iPad",
-      status: "Waiting",
-      submittedDate: "2024-06-22",
-      value: 1800,
-      location: "HSR Layout",
-    },
-  ])
+export const RecyclerDashboard = ({ isDark }) => {
+  const onNavigate = useNavigate()
+
+  const [requests, setRequests] = useState(
+    [
+    //   {
+    //     id: 1,
+    //     device: "Smart TV",
+    //     brand: "Samsung",
+    //     status: "Waiting",
+    //     submittedDate: "2024-06-15",
+    //     value: 2800,
+    //     location: "Koramangala",
+    //   },
+    //   {
+    //     id: 2,
+    //     device: "Laptop",
+    //     brand: "Dell",
+    //     status: "In Progress",
+    //     submittedDate: "2024-06-18",
+    //     value: 3200,
+    //     location: "Whitefield",
+    //   },
+    //   {
+    //     id: 3,
+    //     device: "iPhone",
+    //     brand: "Apple",
+    //     status: "Completed",
+    //     submittedDate: "2024-06-20",
+    //     value: 1500,
+    //     location: "Indiranagar",
+    //   },
+    //   {
+    //     id: 4,
+    //     device: "Tablet",
+    //     brand: "iPad",
+    //     status: "Waiting",
+    //     submittedDate: "2024-06-22",
+    //     value: 1800,
+    //     location: "HSR Layout",
+    //   },
+    ]
+  )
+
+
+  const getRecyclerData = async () => {
+    try {
+      const res = await fetchRecyclerData()
+      setRequests(res.message);
+    } catch (err) {
+      setRequests([])
+      console.error("Error fetching recycler data", err);
+    } 
+    // finally {
+    //   setLoading(false);
+    // }
+  };
+
+  useEffect(() => {
+    getRecyclerData()
+  }, []);
 
   const handleClick = (request) => {
     if (request.status !== "Completed") {
-      onNavigate("recycler-route")
+      onNavigate("/recycler-status")
     }
   }
 
@@ -95,6 +119,7 @@ export const RecyclerDashboard = ({ onNavigate, isDark }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 ml-16">
+
       <div className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="bg-gray-100 dark:bg-gray-900 py-8"></div>
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -392,7 +417,7 @@ export const RecyclerDashboard = ({ onNavigate, isDark }) => {
 
         <div className="mt-12 max-w-7xl mx-auto px-6 text-center">
           <button
-            onClick={() => onNavigate('donate')}
+            onClick={() => onNavigate('/donate')}
             className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold px-6 py-3 rounded-full transition shadow-lg"
           >
             Donate to NGOs

@@ -3,8 +3,12 @@ import Tesseract from "tesseract.js"
 import * as mobilenet from '@tensorflow-models/mobilenet'
 import * as tf from "@tensorflow/tfjs"  
 import '@tensorflow/tfjs-backend-webgl'
+import { useNavigate } from "react-router-dom"
+import { submitForm } from "../api"
 
-export const PickupRequest = ({ onLogout, onBack, onNavigate, isDark }) => {
+export const PickupRequest = ({ onLogout, onBack, isDark }) => {
+  const onNavigate = useNavigate()
+
   const [formData, setFormData] = useState({
     device: "",
     brand: "",
@@ -12,6 +16,7 @@ export const PickupRequest = ({ onLogout, onBack, onNavigate, isDark }) => {
     preferredTime: "",
   })
 
+  const [message, setMessage] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [barcodeFile, setBarcodeFile] = useState(null);
   const [classification, setClassification] = useState("");
@@ -84,12 +89,15 @@ export const PickupRequest = ({ onLogout, onBack, onNavigate, isDark }) => {
   }
 
   const handleBarcode = e => setBarcodeFile(e.target.files[0]);
+  
+  const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8080/api';
 
-  const handleSubmit = () => {
-    if (formData.device && formData.brand && formData.location && formData.preferredTime) {
-      onNavigate("pickup-route")
-    } else {
-      alert("Please fill in all fields")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const result = await submitForm(formData);
+    setMessage(result.message);
+    if (result.success) {
+      onNavigate("/pickup-status");
     }
   }
 
@@ -362,6 +370,7 @@ export const PickupRequest = ({ onLogout, onBack, onNavigate, isDark }) => {
                   Schedule Pickup Now
                 </button>
               </div>
+              {message && <p>{message}</p>}
 
             </div>
           </div>
@@ -381,3 +390,5 @@ export const PickupRequest = ({ onLogout, onBack, onNavigate, isDark }) => {
     </div>
   )
 }
+
+

@@ -1,5 +1,6 @@
 import { Globe, Moon, Sun, Eye, EyeOff, ChevronDown, Loader2, Check } from "lucide-react"
 import { useState, useCallback } from "react"
+import { useNavigate } from "react-router-dom"
 
 const ROLES = [
   { value: "user", label: "User", description: "Individual recycler" },
@@ -14,7 +15,7 @@ const STATS = [
   { value: "120+", label: "Cities Served", color: "text-orange-400" }
 ]
 
-export const SignUp = ({ onLogin, isDark, onDarkToggle, onNavigate }) => {
+export const SignUp = ({ onLogin, isDark, onDarkToggle }) => {
     const [formData, setFormData] = useState({
         role: "user",
         // firstName: "",
@@ -25,6 +26,9 @@ export const SignUp = ({ onLogin, isDark, onDarkToggle, onNavigate }) => {
         // agreeToTerms: false
     })
     const [isLoading, setIsLoading] = useState(false)
+
+    const onNavigate = useNavigate()
+
     // const [showPassword, setShowPassword] = useState(false)
     // const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     // const [errors, setErrors] = useState({})

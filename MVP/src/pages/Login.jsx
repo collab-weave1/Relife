@@ -1,10 +1,11 @@
 import { Globe, Moon, Sun, Eye, EyeOff, ChevronDown, Loader2 } from "lucide-react"
 import { useState, useCallback } from "react"
+import { useNavigate } from "react-router-dom"
 
 const ROLES = [
   { value: "user", label: "User", description: "Individual recycler" },
   { value: "recycler", label: "Recycler", description: "Collection facility" },
-  { value: "admin", label: "Admin", description: "Producer administrator" }
+  { value: "producer", label: "Admin", description: "Producer administrator" }
 ]
 
 const STATS = [
@@ -14,7 +15,7 @@ const STATS = [
   { value: "120+", label: "Cities Served", color: "text-orange-400" }
 ]
 
-export const Login = ({ onLogin, isDark, onDarkToggle, onNavigate }) => {
+export const Login = ({ onLogin, isDark, onDarkToggle }) => {
     const [formData, setFormData] = useState({
         role: "user",
         // email: "",
@@ -43,6 +44,8 @@ export const Login = ({ onLogin, isDark, onDarkToggle, onNavigate }) => {
     //     return Object.keys(newErrors).length === 0
     // }, [formData])
 
+    const onNavigate = useNavigate()
+
     const handleInputChange = useCallback((field, value) => {
         setFormData(prev => ({ ...prev, [field]: value }))
         if (errors[field]) {
@@ -58,9 +61,9 @@ export const Login = ({ onLogin, isDark, onDarkToggle, onNavigate }) => {
         setIsLoading(true)
         try {
             await new Promise((resolve) => setTimeout(resolve, 1500))
-            onLogin(formData.role
-                // ,formData
-            )
+            onLogin(formData.role)
+            onNavigate('/'+formData.role)
+
         } catch (error) {
             setErrors({ submit: "Login failed. Please try again." })
         } finally {
@@ -238,7 +241,7 @@ export const Login = ({ onLogin, isDark, onDarkToggle, onNavigate }) => {
                         <p className="text-gray-600 dark:text-gray-400 text-sm">
                             Don't have an account?{' '}
                             <button
-                                onClick={() => onNavigate('signup')}
+                                onClick={() => onNavigate('/signup')}
                                 className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-semibold transition-colors"
                             >
                                 Sign up

@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
-// import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+
+import { useAuth } from './auth/AuthProvider';
 
 import { UserDashboard } from './pages/UserDashboard';
 import { RecyclerDashboard } from './pages/RecyclerDashboard';
@@ -10,92 +12,94 @@ import { PickupStatus } from './pages/PickupStatus';
 import { RecyclerStatus } from './pages/RecyclerStatus';
 import { Marketplace } from './pages/Marketplace';
 import { Home } from './pages/Home';
-import { Footer } from './components/Footer';
 import {SignUp} from './pages/SignUp';
-import Navbar from './components/Navbar';
 import { About } from './pages/About';
 import { Donate } from './pages/Donate';
 
+import { Footer } from './components/Footer';
+import Navbar from './components/Navbar';
+
+const PrivateRoute = ({ children, role, currentUser }) => {
+  if (!currentUser) return <Navigate to="/login" replace />;
+  if (currentUser.role !== role) return <Navigate to={`/${currentUser.role}`} replace />;
+  return children;
+};
+
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [currentPage, setCurrentPage] = useState('home');
   const [isDark, setIsDark] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogin = (role) => {
     setCurrentUser({ role });
-    setCurrentPage(`${role}-dashboard`);
-  };
-
+    setSidebarOpen(true)
+  }
   const handleLogout = () => {
     setCurrentUser(null);
-    setCurrentPage('login');
-  };
-
-  const handleNavigate = (page) => {
-    setCurrentPage(page);
-  };
-
-  const handleBack = () => {
-    if (currentUser) {
-      setCurrentPage(`${currentUser.role}-dashboard`);
-    } else {
-      setCurrentPage('login');
-    }
-  };
-
-  const renderPage = () => {
-    switch (currentPage) {
-
-      case 'home':
-        return <Home onNavigate={handleNavigate} onDarkToggle={() => setIsDark(!isDark)} isDark={isDark}/>;
-      case 'about':
-        return <About isDark={isDark} onDarkToggle={() => setIsDark(!isDark)} onNavigate={handleNavigate}/>
-      case 'donate':
-          return <Donate isDark={isDark} onDarkToggle={() => setIsDark(!isDark)} onNavigate={handleNavigate}/>
-      case 'login':
-        return <Login onLogin={handleLogin} isDark={isDark} onDarkToggle={() => setIsDark(!isDark)} onNavigate={handleNavigate}/>;
-      case 'signup':
-        return <SignUp onLogin={handleLogin} isDark={isDark} onDarkToggle={() => setIsDark(!isDark)} onNavigate={handleNavigate}/>;
-      case 'user-dashboard':
-        return <UserDashboard onLogout={handleLogout} onNavigate={handleNavigate} />;
-      case 'recycler-dashboard':
-        return <RecyclerDashboard onLogout={handleLogout} onNavigate={handleNavigate} />;
-      case 'admin-dashboard':
-        return <AdminDashboard onLogout={handleLogout} onNavigate={handleNavigate} />;
-      case 'pickup-request':
-        return <PickupRequest onLogout={handleLogout} onBack={handleBack} onNavigate={handleNavigate} />;
-      case 'pickup-route':
-        return <PickupStatus onBack={handleBack} onLogout={handleLogout} />;
-      case 'recycler-route':
-        return <RecyclerStatus onBack={handleBack} onLogout={handleLogout} />;
-      case 'marketplace':
-        return (
-          <Marketplace
-            onLogout={handleLogout}
-            onBack={handleBack}
-            currentUser={currentUser}
-          />
-        );
-      default:
-        return <Login onLogin={handleLogin} />;
-    }
-  };
+    setSidebarOpen(false);
+  }
 
   return (
     <div className={`flex flex-col min-h-screen ${isDark ? 'dark' : ''}`}>
-      (
-      <Navbar
-        role={currentUser?.role}
-        isDark={isDark}
-        onDarkToggle={() => setIsDark(!isDark)}
-        onLogout={handleLogout}
-        onNavigate={handleNavigate}
-      />
-      )
-      <div className="flex-1 text-gray-900 dark:text-gray-100">
-        {renderPage()}
-      </div>
-      <Footer />
+      <Router>
+        <Navbar
+          role={currentUser?.role}
+          isDark={isDark}
+          onDarkToggle={() => setIsDark(!isDark)}
+          onLogout={handleLogout}
+        />
+
+        <div className="flex-1 text-gray-900 dark:text-gray-100 pt-16">
+          <Routes>
+            <Route path="/" element={<Home onDarkToggle={() => setIsDark(!isDark)} isDark={isDark} />} />
+            <Route path="/about" element={<About isDark={isDark} onDarkToggle={() => setIsDark(!isDark)} />} />
+            <Route path="/donate" element={<Donate isDark={isDark} onDarkToggle={() => setIsDark(!isDark)} />} />
+            <Route path="/login" element={<Login onLogin={handleLogin} isDark={isDark} onDarkToggle={() => setIsDark(!isDark)} />} />
+            <Route path="/signup" element={<SignUp onLogin={handleLogin} isDark={isDark} onDarkToggle={() => setIsDark(!isDark)} />} />
+
+            <Route
+              path="/user"
+              element={
+                // <PrivateRoute role="user" currentUser={currentUser}>
+                  <UserDashboard onLogout={handleLogout} />
+                // </PrivateRoute>
+              }
+            />
+            <Route
+              path="/recycler"
+              element={
+                // <PrivateRoute role="recycler" currentUser={currentUser}>
+                  <RecyclerDashboard onLogout={handleLogout} />
+                // </PrivateRoute>
+              }
+            />
+            <Route
+              path="/producer"
+              element={
+                // <PrivateRoute role="producer" currentUser={currentUser}>
+                  <AdminDashboard onLogout={handleLogout} />
+                // </PrivateRoute>
+              }
+            />
+            <Route
+              path="/pickup-request"
+              element={<PickupRequest onLogout={handleLogout} />} />
+            <Route
+              path="/pickup-status"
+              element={<PickupStatus onLogout={handleLogout} />} />
+            <Route
+              path="/recycler-status"
+              element={<RecyclerStatus onLogout={handleLogout} />} />
+            <Route
+              path="/marketplace"
+              element={<Marketplace onLogout={handleLogout} role={currentUser?.role} />} />
+
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </div>
+
+        <Footer />
+      </Router>
     </div>
   );
 };

@@ -1,9 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Confetti from "react-confetti";
 import { Globe, Package, Sprout, TreePine, Lightbulb, Heart, Battery, Lock, Building2, ArrowRight } from "lucide-react"
 
 import ChatWidget from "../components/Chat";
-// import App from "../components/chat";
+import { useNavigate } from "react-router-dom";
 
 const SectionHeading = ({ children }) => (
   <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center">{children}</h2>
@@ -20,9 +20,20 @@ const ExportButtons = () => (
   </div>
 )
 
-export const UserDashboard = ({ onLogout, onNavigate, isDark }) => {
+export const UserDashboard = ({ onLogout, isDark }) => {
+
+  const onNavigate = useNavigate()
+
   const [sampleData] = useState([
-    { id: 1, device: "iPhone 12", brand: "Apple", status: "Recycled", date: "2024-06-01", value: 8500, co2Saved: 12 },
+    { 
+      id: 1, 
+      device: "iPhone 12", 
+      brand: "Apple", 
+      status: "Recycled", 
+      date: "2024-06-01", 
+      value: 8500, 
+      co2Saved: 12 
+    },
     {
       id: 2,
       device: "MacBook Pro",
@@ -41,46 +52,72 @@ export const UserDashboard = ({ onLogout, onNavigate, isDark }) => {
       value: 15000,
       co2Saved: 68,
     },
-    { id: 4, device: "iPad Air", brand: "Apple", status: "Pending", date: "2024-06-25", value: 12000, co2Saved: 25 },
+    { 
+      id: 4, 
+      device: "iPad Air", 
+      brand: "Apple", 
+      status: "Pending", 
+      date: "2024-06-25", 
+      value: 12000, 
+      co2Saved: 25 
+    },
   ])
 
-  const badges = [
-    {
-      key: "ecoInitiator",
-      label: "Eco Initiator",
-      icon: <Sprout className="w-6 h-6 text-green-500" />,
-      tip: "Celebrate your first step toward making e-waste matter!",
-      enabled: true
-    },
-    {
-      key: "firstPickup",
-      label: "First Pickup",
-      icon: <Package className="w-6 h-6 text-blue-500" />,
-      tip: "You’ve scheduled your very first pickup request",
-      enabled: false
-    },
-    {
-      key: "referralHero",
-      label: "Referral Hero",
-      icon: <Globe className="w-6 h-6 text-indigo-500" />,
-      tip: "You’ve invited 3 friends who also signed up",
-      enabled: false
-    },
-    {
-      key: "collectionConnoisseur",
-      label: "Collection Connoisseur",
-      icon: <TreePine className="w-6 h-6 text-yellow-500" />,
-      tip: "You’ve completed 5 pickups",
-      enabled: false
-    },
-    {
-      key: "marketplaceMaven",
-      label: "Marketplace Maven",
-      icon: <Heart className="w-6 h-6 text-pink-500" />,
-      tip: "You bought or sold your first refurbished device",
-      enabled: false
-    },
-  ]
+  const [proof, setProof] = useState(null);
+  const [badges, setBadges] = useState([]);
+
+  useEffect(() => {
+    const fetchProof = async () => {
+      try {
+        const res = await api.get(`/api/progress/${userId}`);
+        setProof(res.data);
+
+        const earnedKeys = res.data.badges?.map(b => b.badgeKey) || [];
+
+        const allBadges = [
+          {
+            key: "ecoInitiator",
+            label: "Eco Initiator",
+            icon: <Sprout className="w-6 h-6 text-green-500" />,
+            tip: "Celebrate your first step toward making e-waste matter!"
+          },
+          {
+            key: "firstPickup",
+            label: "First Pickup",
+            icon: <Package className="w-6 h-6 text-blue-500" />,
+            tip: "You’ve scheduled your very first pickup request"
+          },
+          {
+            key: "referralHero",
+            label: "Referral Hero",
+            icon: <Globe className="w-6 h-6 text-indigo-500" />,
+            tip: "You’ve invited 3 friends who also signed up"
+          },
+          {
+            key: "collectionConnoisseur",
+            label: "Collection Connoisseur",
+            icon: <TreePine className="w-6 h-6 text-yellow-500" />,
+            tip: "You’ve completed 5 pickups"
+          },
+          {
+            key: "marketplaceMaven",
+            label: "Marketplace Maven",
+            icon: <Heart className="w-6 h-6 text-pink-500" />,
+            tip: "You bought or sold your first refurbished device"
+          }
+        ].map(b => ({
+          ...b,
+          enabled: earnedKeys.includes(b.key)
+        }));
+
+        setBadges(allBadges);
+      } catch (err) {
+        console.error("Error fetching proof:", err);
+      }
+    };
+
+    fetchProof();
+  }, [userId]);
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -148,38 +185,38 @@ export const UserDashboard = ({ onLogout, onNavigate, isDark }) => {
   const completedItems = sampleData.filter((item) => item.status !== "Pending").length
 
   return (
-              <div className="flex justify-between items-start gap-8 flex-wrap lg:flex-nowrap bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 ml-16">
+    <div className="flex justify-between items-start gap-8 flex-wrap lg:flex-nowrap bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 ml-16">
 
 
-      <div className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
-        <div className="bg-gray-100 dark:bg-gray-900 py-6"></div>
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <div className="flex justify-between items-start gap-8 flex-wrap lg:flex-nowrap">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center pl-2">
-                <span className="text-white font-bold text-xl">
-                  <Sprout className="w-5 h-5 mr-2" />
-                </span>
+        <div className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+          <div className="bg-gray-100 dark:bg-gray-900 py-6"></div>
+          <div className="max-w-7xl mx-auto px-6 py-6 ">
+            <div className="flex justify-between items-start gap-8 flex-wrap lg:flex-nowrap">
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center pl-2">
+                  <span className="text-white font-bold text-xl">
+                    <Sprout className="w-5 h-5 mr-2" />
+                  </span>
+                </div>
+                <div className="flex-1">
+                  <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Welcome!</h1>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Make a difference with sustainable e-waste management
+                  </p>
+                </div>
               </div>
-              <div className="flex-1">
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Welcome!</h1>
-                <p className="text-gray-600 dark:text-gray-400">
-                  Make a difference with sustainable e-waste management
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="hidden sm:flex items-center space-x-2 bg-green-100 dark:bg-green-900/30 px-4 py-2 rounded-full">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium text-green-700 dark:text-green-400">Eco-Warrior</span>
+              <div className="flex items-center space-x-4">
+                <div className="hidden sm:flex items-center space-x-2 bg-green-100 dark:bg-green-900/30 px-4 py-2 rounded-full">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-sm font-medium text-green-700 dark:text-green-400">Eco-Warrior</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 dark:from-green-700 dark:via-blue-700 dark:to-purple-700 rounded-3xl p-8 mb-8 text-white relative overflow-hidden">
             <div className="absolute inset-0 bg-black opacity-10 dark:opacity-20"></div>
             <div className="relative z-10">
@@ -190,7 +227,7 @@ export const UserDashboard = ({ onLogout, onNavigate, isDark }) => {
                     Turn your old electronics into environmental action and earn money while doing it!
                   </p>
                   <button
-                    onClick={() => onNavigate("pickup-request")}
+                    onClick={() => onNavigate("/pickup-request")}
                     className="bg-white dark:bg-gray-100 text-blue-600 dark:text-blue-700 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 dark:hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center space-x-2"
                   >
                     <span className="text-2xl">
@@ -473,7 +510,7 @@ export const UserDashboard = ({ onLogout, onNavigate, isDark }) => {
 
           <div className="mt-12 mb-4 mx-auto max-w-7xl text-center">
             <button
-              onClick={() => onNavigate('donate')}
+              onClick={() => onNavigate('/donate')}
               className="bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-4 rounded-full transition shadow-xl flex items-center justify-center gap-2"
             >
               Help NGOs Today
@@ -486,29 +523,29 @@ export const UserDashboard = ({ onLogout, onNavigate, isDark }) => {
         </div>
       </div>
       <aside className="w-full sm:w-80 bg-white dark:bg-gray-800 rounded-xl p-4 shadow border border-gray-100 dark:border-gray-700 mt-16">
-  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">🎖 Your Badges</h3>
-  <ul className="space-y-3">
-    {badges.map(badge => (
-      <li
-      key={badge.key}
-      className={`
-        group flex items-center space-x-3 p-2 rounded-md relative
-        ${badge.enabled ? 'hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer' : 'opacity-50 grayscale cursor-not-allowed'}
-      `}
-    >
-      <div className={badge.enabled ? '' : 'opacity-50'}>
-        {badge.icon}
-      </div>
-      <div className={`font-medium ${badge.enabled ? 'text-gray-700 dark:text-gray-200' : 'text-gray-400 dark:text-gray-500'}`}>
-        {badge.label}
-      </div>
-        <div className="absolute top-full mt-5 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 text-white text-xs rounded px-2 py-1 w-48 z-10">
-          {badge.tip}
-        </div>
-      </li>
-    ))}
-  </ul>
-</aside>
+      <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">🎖 Your Badges</h3>
+      <ul className="space-y-3">
+        {badges.map(badge => (
+          <li
+            key={badge.key}
+            className={`
+              group flex items-center space-x-3 p-2 rounded-md relative
+              ${badge.enabled ? 'hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer' : 'opacity-50 grayscale cursor-not-allowed'}
+            `}
+          >
+            <div className={badge.enabled ? '' : 'opacity-50'}>
+              {badge.icon}
+            </div>
+            <div className={`font-medium ${badge.enabled ? 'text-gray-700 dark:text-gray-200' : 'text-gray-400 dark:text-gray-500'}`}>
+              {badge.label}
+            </div>
+            <div className="absolute top-full mt-5 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 text-white text-xs rounded px-2 py-1 w-48 z-10">
+              {badge.tip}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </aside>
     </div>
   )
 }

@@ -3,11 +3,12 @@ import { Container, Header, MessageList, Composer, useWebchat, Fab } from '@botp
 import { useState, useMemo } from 'react'
 import logo from '../assets/bot-logo.png'
 import bot from '../assets/bot.png'
+import support from '../assets/chat-support.png'
 import { useSound } from 'react-sounds';
 
 const headerConfig = {
   botName: 'Relife Assistant',
-  // botAvatar: logo,
+  botAvatar: support,
   // botDescription: 'Your virtual assistant for all things support.',
 
   phone: {
@@ -52,7 +53,7 @@ const ChatWidget = () => {
   const config = {
     botName: 'Relife Assistant',
     botAvatar: logo,
-    botDescription: 'Your virtual assistant for all things support.',
+    botDescription: 'Your AI agent for all things support.',
   }
   const enrichedMessages = useMemo(
     () =>

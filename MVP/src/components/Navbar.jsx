@@ -12,29 +12,29 @@ import {
 } from 'lucide-react';
 
 import logo from '../assets/recycle-leaf.png'
+import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ role, onLogout, onNavigate, onDarkToggle, isDark }) => {
+const Navbar = ({ role, onLogout, onDarkToggle, isDark }) => {
     const [isCollapsed, setIsCollapsed] = useState(true);
     const [activeItem, setActiveItem] = useState('dashboard');
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-    
+
+    const onNavigate = useNavigate()
 
     const roleLabel = {
-        admin: 'Admin Portal',
+        producer: 'Admin Portal',
         user: 'User Portal',
         recycler: 'Recycler Portal'
     }[role];
 
     const menuItems = [
-        { id: `${role}-dashboard`, label: 'Dashboard', icon: Home, badge: null },
+        { id: `${role}`, label: 'Dashboard', icon: Home, badge: null },
         { id: 'marketplace', label: 'Marketplace', icon: ShoppingCart, badge: null },
         { id: 'profile', label: 'Profile', icon: User, badge: null },
         { id: 'settings', label: 'Settings', icon: Settings, badge: null },
     ];
 
     const handleNavigate = (route) => {
-        setSidebarOpen(false);
-        onNavigate(route);
+        onNavigate("/"+route);
     };
 
     const handleItemClick = (itemId) => {
@@ -48,6 +48,13 @@ const Navbar = ({ role, onLogout, onNavigate, onDarkToggle, isDark }) => {
                 <div className="px-6 py-4">
                     <div className="flex justify-between items-center">
                         <div className="flex items-center space-x-4">
+
+                            {role && <button
+                                onClick={() => setIsCollapsed(!isCollapsed)}
+                                className="md:hidden text-white hover:bg-white/20 p-2 rounded-lg"
+                            >
+                                <Menu className="w-6 h-6" />
+                            </button>}
 
                             {role && <button
                                 onClick={() => setIsCollapsed(!isCollapsed)}
@@ -76,14 +83,14 @@ const Navbar = ({ role, onLogout, onNavigate, onDarkToggle, isDark }) => {
                 </div>
             </nav>
 
-            {role && sidebarOpen && (
+            {role && isCollapsed && (
                 <div className="md:hidden bg-white dark:bg-gray-800 shadow-lg fixed top-20 left-0 right-0 z-40">
                     <div className="p-4">
                         <button
                             onClick={
                                 () => {
                                     if(role){
-                                        handleNavigate(role + '-dashboard')
+                                        handleNavigate(role)
                                     }
                                 }
                             }
@@ -107,7 +114,12 @@ const Navbar = ({ role, onLogout, onNavigate, onDarkToggle, isDark }) => {
                             Theme
                         </button>
                         <button
-                            onClick={onLogout}
+                            onClick={
+                                ()=>{
+                                    onLogout()
+                                    onNavigate("/login")
+                                }
+                            }
                             className="flex items-center w-full px-4 py-3 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg"
                         >
                             <LogOut className="w-5 h-5 mr-3" /> 
@@ -168,14 +180,19 @@ const Navbar = ({ role, onLogout, onNavigate, onDarkToggle, isDark }) => {
 
                 <div className="p-4 border-t border-gray-200 dark:border-gray-700">
                     <button
-                        onClick={onLogout}
+                        onClick={
+                            ()=>{
+                                onLogout()
+                                onNavigate("/login")
+                            }
+                        }
                         className={`w-full flex items-center ${isCollapsed ? 'justify-center' : 'justify-start'
                             } py-3 px-4 rounded-lg text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200`}
                     >
                         <LogOut className="w-5 h-5" />
                         {!isCollapsed && <span className="ml-3 font-medium">Logout</span>}
                     </button>
-                    
+
                     {!isCollapsed && (
                         <button
                             onClick={onDarkToggle}
