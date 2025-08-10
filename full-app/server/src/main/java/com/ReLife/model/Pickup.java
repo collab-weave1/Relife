@@ -8,24 +8,32 @@ import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Pickup {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@NotBlank
-	private String userId;
+    @NotBlank
+    private String userId;
 
-	@NotBlank
-	private String device;
+    @NotBlank
+    private String device;
 
-	@NotBlank
-	private String location;
+    @NotBlank
+    private String brand;
 
-	@NotBlank
-	private String preferredTime;
+    @NotBlank
+    private String location;
 
-	@NotBlank
+    @NotBlank
+    private String preferredTime;
+
+    @NotBlank
     private String status;
+
+    @NotBlank
+    private String submittedDate;
+
+    private Double value; 
 
 	public Long getId() {
 		return id;
@@ -73,6 +81,30 @@ public class Pickup {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getSubmittedDate() {
+		return submittedDate;
+	}
+
+	public void setSubmittedDate(String submittedDate) {
+		this.submittedDate = submittedDate;
+	}
+
+	public Double getValue() {
+		return value;
+	}
+
+	public void setValue(Double value) {
+		this.value = value;
 	}
 
 }

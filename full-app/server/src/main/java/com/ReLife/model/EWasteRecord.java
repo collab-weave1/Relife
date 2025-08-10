@@ -34,7 +34,10 @@ public class EWasteRecord {
     @JoinColumn(name = "recycler_id")
     private Recycler recycler;
 
-    // Getters and setters
+    @ManyToOne
+    @JoinColumn(name = "marketplace_item_id")
+    private MarketplaceItem marketplaceItem;
+    
     public Long getId() {
         return id;
     }

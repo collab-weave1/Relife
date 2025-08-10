@@ -64,8 +64,12 @@ public class BadgeEvent {
 
 	@Override
 	public String toString() {
-		return "BadgeEvent [id=" + id + ", userId=" + userId + ", badgeKey=" + badgeKey + ", timestamp=" + timestamp
-				+ ", chainHash=" + chainHash + "]";
+		return "BadgeEvent [id=" + id 
+				+ ", userId=" + userId 
+				+ ", badgeKey=" + badgeKey 
+				+ ", timestamp=" + timestamp
+				+ ", chainHash=" + chainHash 
+				+ "]";
 	}
 
 }

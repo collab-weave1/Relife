@@ -20,7 +20,18 @@ public class SecurityConfig {
         http.cors().and().csrf().disable()
             .authorizeHttpRequests()
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-            .requestMatchers("/api/auth/**", "/api/payment/**","/api/admin/**","/api/pickups/**").permitAll()
+            .requestMatchers(
+            		"/api/auth/**", 
+            		"/api/payment/**",
+            		"/api/admin/**",
+            		"/api/pickups/**",
+            		"/actuator/**",
+            		"swagger-ui/**",
+                    "/v3/api-docs/**",    // allow OpenAPI JSON
+                    "/swagger-ui.html",   // older redirect
+                    "/webjars/**",        // static assets if used
+                    "/favicon.ico"
+            	).permitAll()
             .anyRequest().authenticated()
             .and().sessionManagement().disable();
         return http.build();
