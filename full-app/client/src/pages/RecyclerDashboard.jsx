@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { fetchRecyclerData } from "../api"
 
-export const RecyclerDashboard = ({ isDark }) => {
+export const RecyclerDashboard = () => {
   const onNavigate = useNavigate()
 
   const [requests, setRequests] = useState(

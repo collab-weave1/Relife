@@ -35,7 +35,7 @@ const initialProducts = [
   },
 ]
 
-export const Marketplace = ({ onLogout, onBack, role, isDark }) => {
+export const Marketplace = ({ role }) => {
   const [products, setProducts] = useState(initialProducts)
   const [formData, setFormData] = useState({
     name: "",

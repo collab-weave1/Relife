@@ -239,3 +239,20 @@ export const fetchRecyclerData = async () => {
         }
     }
 }
+
+export const userPickup = async () => {
+    try {
+        const response = api
+            .get(`/pickup/user`)
+        return {
+            success: true,
+            message: response
+        }
+    } catch (error) {
+        console.error("Error fetching recycler pickups:", error)
+        return {
+            success: false,
+            message: 'Error fetching data'
+        }
+    }
+}

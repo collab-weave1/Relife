@@ -4,6 +4,7 @@ import { Globe, Package, Sprout, TreePine, Lightbulb, Heart, Battery, Lock, Buil
 
 import ChatWidget from "../components/Chat";
 import { useNavigate } from "react-router-dom";
+import { api } from "../api";
 
 const SectionHeading = ({ children }) => (
   <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center">{children}</h2>
@@ -64,53 +65,63 @@ export const UserDashboard = ({ onLogout, isDark }) => {
   ])
 
   const [proof, setProof] = useState(null);
-  const [badges, setBadges] = useState([]);
+  
+  const [badges, setBadges] = useState([
+    {
+      key: "ecoInitiator",
+      label: "Eco Initiator",
+      icon: <Sprout className="w-6 h-6 text-green-500" />,
+      tip: "Celebrate your first step toward making e-waste matter!",
+      enabled: true
+    },
+    {
+      key: "firstPickup",
+      label: "First Pickup",
+      icon: <Package className="w-6 h-6 text-blue-500" />,
+      tip: "You've scheduled your very first pickup request",
+      enabled: false
+    },
+    {
+      key: "referralHero",
+      label: "Referral Hero",
+      icon: <Globe className="w-6 h-6 text-indigo-500" />,
+      tip: "You've invited 3 friends who also signed up",
+      enabled: false
+    },
+    {
+      key: "collectionConnoisseur",
+      label: "Collection Connoisseur",
+      icon: <TreePine className="w-6 h-6 text-yellow-500" />,
+      tip: "You've completed 5 pickups",
+      enabled: false
+    },
+    {
+      key: "marketplaceMaven",
+      label: "Marketplace Maven",
+      icon: <Heart className="w-6 h-6 text-pink-500" />,
+      tip: "You bought or sold your first refurbished device",
+      enabled: false
+    }
+  ]);
 
+  let userId = 1
   useEffect(() => {
     const fetchProof = async () => {
       try {
-        const res = await api.get(`/api/progress/${userId}`);
+        let res = await api.get(`/api/progress/${userId}`);
         setProof(res.data);
 
+        // Get earned badge keys from API response
         const earnedKeys = res.data.badges?.map(b => b.badgeKey) || [];
 
-        const allBadges = [
-          {
-            key: "ecoInitiator",
-            label: "Eco Initiator",
-            icon: <Sprout className="w-6 h-6 text-green-500" />,
-            tip: "Celebrate your first step toward making e-waste matter!"
-          },
-          {
-            key: "firstPickup",
-            label: "First Pickup",
-            icon: <Package className="w-6 h-6 text-blue-500" />,
-            tip: "You’ve scheduled your very first pickup request"
-          },
-          {
-            key: "referralHero",
-            label: "Referral Hero",
-            icon: <Globe className="w-6 h-6 text-indigo-500" />,
-            tip: "You’ve invited 3 friends who also signed up"
-          },
-          {
-            key: "collectionConnoisseur",
-            label: "Collection Connoisseur",
-            icon: <TreePine className="w-6 h-6 text-yellow-500" />,
-            tip: "You’ve completed 5 pickups"
-          },
-          {
-            key: "marketplaceMaven",
-            label: "Marketplace Maven",
-            icon: <Heart className="w-6 h-6 text-pink-500" />,
-            tip: "You bought or sold your first refurbished device"
-          }
-        ].map(b => ({
-          ...b,
-          enabled: earnedKeys.includes(b.key)
-        }));
+        // Update badges state to enable only the earned ones
+        setBadges(prevBadges => 
+          prevBadges.map(badge => ({
+            ...badge,
+            enabled: earnedKeys.includes(badge.key)
+          }))
+        );
 
-        setBadges(allBadges);
       } catch (err) {
         console.error("Error fetching proof:", err);
       }

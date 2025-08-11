@@ -6,7 +6,7 @@ import { StatChart } from "../components/StatChart"
 import { ExportButtons } from "../components/ExportButtons"
 import { fetchAdminStats } from "../api"
 
-export const AdminDashboard = ({ onLogout, isDark }) => {
+export const AdminDashboard = () => {
   const [stats, setStats] = useState(null)
   const [loading, setLoading] = useState(true)
 
