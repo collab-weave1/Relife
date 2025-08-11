@@ -13,42 +13,15 @@ EPR compliance platform — Scalable Web Platform for E-Waste Management & Circu
 > **Note:** The backend instance may spin down with inactivity (render/Aiven), which can delay requests by ~50s or more.
 
 ## Table of Contents
-
-    Overview
-
-    Key Features
-
-    Roles
-
-    Tech Stack
-
-    Architecture Overview
-
-    Prerequisites
-
-    Local Development
-
-        Frontend (React + Vite)
-
-        Backend (Spring Boot)
-
-        Running with Docker (recommended)
-
-    Environment Variables
-
-    API Documentation
-
-    Deployment
-
-    Testing & Code Quality
-
-    Troubleshooting
-
-    Contributing
-
-    License
-
-    Contact
+1. [Overview](#overview)
+2. [Key Features](#key-features)
+3. [Roles](#roles)
+4. [Tech Stack](#tech-stack)
+5. [Architecture Overview](#architecture-overview)
+6. [API Documentation](#api-documentation)
+7. [Deployment](#deployment)
+8. [Testing and Code Quality](#testing-and-code-quality)
+9. [Troubleshooting](#troubleshooting)
 
 ## Overview
 
@@ -114,9 +87,10 @@ https://relife-y0xi.onrender.com/swagger-ui/index.html
 - **Database:** Aiven (managed MySQL)
 - **Sonarcloud and GitHub Actions for CI/CD:** run tests, lint, build images
 
-## Testing & Code Quality
+## Testing and Code Quality
 - Frontend linting: eslint.
 - SonarCloud integration via Maven plugin (configured in pom.xml) for vulnerability & code smell scanning. Ensure Sonar token is configured in CI.
 
 ## Troubleshooting
 Slow / delayed responses — As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. 
+
