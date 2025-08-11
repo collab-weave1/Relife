@@ -95,7 +95,7 @@ export const SignUp = ({ onLogin, isDark, onDarkToggle }) => {
             // setErrors({ submit: "Signup failed. Please try again." })
         } finally {
             setIsLoading(false)
-            onNavigate('login')
+            onNavigate('/login')
         }
     }
 
@@ -409,7 +409,7 @@ export const SignUp = ({ onLogin, isDark, onDarkToggle }) => {
                             <p className="text-gray-600 dark:text-gray-400 text-sm">
                                 Already have an account?{' '}
                                 <button 
-                                    onClick={() => onNavigate('login')}
+                                    onClick={() => onNavigate('/login')}
                                     className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-semibold transition-colors"
                                 >
                                     Sign in

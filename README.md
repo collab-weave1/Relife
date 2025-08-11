@@ -1,6 +1,6 @@
 # Relife
 
-EPR compliance platform — Scalable Web Platform for E-Waste Management & Circular Economy
+EPR compliance platform. Scalable Web Platform for E-Waste Management & Circular Economy
 
 ## Demo / Links
 
@@ -13,49 +13,22 @@ EPR compliance platform — Scalable Web Platform for E-Waste Management & Circu
 > **Note:** The backend instance may spin down with inactivity (render/Aiven), which can delay requests by ~50s or more.
 
 ## Table of Contents
-
-    Overview
-
-    Key Features
-
-    Roles
-
-    Tech Stack
-
-    Architecture Overview
-
-    Prerequisites
-
-    Local Development
-
-        Frontend (React + Vite)
-
-        Backend (Spring Boot)
-
-        Running with Docker (recommended)
-
-    Environment Variables
-
-    API Documentation
-
-    Deployment
-
-    Testing & Code Quality
-
-    Troubleshooting
-
-    Contributing
-
-    License
-
-    Contact
+1. [Overview](#overview)
+2. [Key Features](#key-features)
+3. [Roles](#roles)
+4. [Tech Stack](#tech-stack)
+5. [Architecture Overview](#architecture-overview)
+6. [API Documentation](#api-documentation)
+7. [Deployment](#deployment)
+8. [Testing and Code Quality](#testing-and-code-quality)
+9. [Troubleshooting](#troubleshooting)
 
 ## Overview
 
 ReLife is a web-first platform to help producers, recyclers, and consumers meet Extended Producer Responsibility (EPR) goals by enabling geo-enabled pickups, gamified incentives, a circular marketplace for refurbished devices, and verifiable proof-of-progress using blockchain.
 
 ## Key Features
-- Geo-enabled pickup scheduling + route optimization
+- Geo-enabled pickup scheduling
 - Gamified incentives (Eco-Points) and blockchain-backed badges (proof-of-progress)
 - Circular marketplace for certified refurbished electronics
 - AI agent assistant (in-browser capabilities)
@@ -72,7 +45,7 @@ ReLife is a web-first platform to help producers, recyclers, and consumers meet 
 ## Tech Stack
 ### Frontend
 - React, Vite
-- ml5.js (in-browser AI) / @tensorflow/tfjs / mobilenet
+- ml5.js (in-browser AI) / mobilenet
 - tesseract.js (OCR)
 - howler.js (audio)
 - Mapbox (map), recharts, framer-motion, three.js
@@ -114,9 +87,11 @@ https://relife-y0xi.onrender.com/swagger-ui/index.html
 - **Database:** Aiven (managed MySQL)
 - **Sonarcloud and GitHub Actions for CI/CD:** run tests, lint, build images
 
-## Testing & Code Quality
+## Testing and Code Quality
 - Frontend linting: eslint.
 - SonarCloud integration via Maven plugin (configured in pom.xml) for vulnerability & code smell scanning. Ensure Sonar token is configured in CI.
 
 ## Troubleshooting
 Slow / delayed responses — As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. 
+
+

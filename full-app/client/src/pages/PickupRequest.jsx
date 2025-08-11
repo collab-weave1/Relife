@@ -6,7 +6,7 @@ import '@tensorflow/tfjs-backend-webgl'
 import { useNavigate } from "react-router-dom"
 import { submitForm } from "../api"
 
-export const PickupRequest = ({ onLogout, onBack, isDark }) => {
+export const PickupRequest = () => {
   const onNavigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -90,8 +90,6 @@ export const PickupRequest = ({ onLogout, onBack, isDark }) => {
 
   const handleBarcode = e => setBarcodeFile(e.target.files[0]);
   
-  const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8080/api';
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = await submitForm(formData);

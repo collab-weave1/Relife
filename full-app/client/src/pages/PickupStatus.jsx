@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback } from "react"
 import { MapRoute } from "../components/MapRoute"
 import { useNavigate } from "react-router-dom"
+import { userPickup } from "../api"
 
 const dummyUserLocation = [77.5946, 12.9716]
 const dummyRecyclerLocation = [77.5806, 12.9352]
 
-export const PickupStatus = ({ onLogout, onBack, isDark }) => {
+export const PickupStatus = ({ isDark }) => {
   const onNavigate = useNavigate()
 
   const [eta, setEta] = useState(18)
@@ -14,11 +15,8 @@ export const PickupStatus = ({ onLogout, onBack, isDark }) => {
   const [phone] = useState("9960123267")
   const [statusList, setStatusList] = useState([]);
 
-  const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8080/api';
-
   useEffect(() => {
-    api
-    .get(`${API_BASE}/pickup/user`)
+    userPickup()
     .then(setStatusList)
     .catch(console.error);
   }, []);

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 const dummyRecyclerLocation = [77.5806, 12.9352]
 const dummyUserLocation = [77.5946, 12.9716]
 
-export const RecyclerStatus = ({ onBack, onLogout, isDark }) => {
+export const RecyclerStatus = () => {
   const [eta, setEta] = useState(18)
   const [isNavigating, setIsNavigating] = useState(false)
   const [collectionStatus, setCollectionStatus] = useState("en-route")
