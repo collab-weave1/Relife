@@ -1,6 +1,6 @@
 # Relife
 
-EPR compliance platform — Scalable Web Platform for E-Waste Management & Circular Economy
+EPR compliance platform. Scalable Web Platform for E-Waste Management & Circular Economy
 
 ## Demo / Links
 
@@ -28,7 +28,7 @@ EPR compliance platform — Scalable Web Platform for E-Waste Management & Circu
 ReLife is a web-first platform to help producers, recyclers, and consumers meet Extended Producer Responsibility (EPR) goals by enabling geo-enabled pickups, gamified incentives, a circular marketplace for refurbished devices, and verifiable proof-of-progress using blockchain.
 
 ## Key Features
-- Geo-enabled pickup scheduling + route optimization
+- Geo-enabled pickup scheduling
 - Gamified incentives (Eco-Points) and blockchain-backed badges (proof-of-progress)
 - Circular marketplace for certified refurbished electronics
 - AI agent assistant (in-browser capabilities)
@@ -45,7 +45,7 @@ ReLife is a web-first platform to help producers, recyclers, and consumers meet 
 ## Tech Stack
 ### Frontend
 - React, Vite
-- ml5.js (in-browser AI) / @tensorflow/tfjs / mobilenet
+- ml5.js (in-browser AI) / mobilenet
 - tesseract.js (OCR)
 - howler.js (audio)
 - Mapbox (map), recharts, framer-motion, three.js
@@ -93,4 +93,5 @@ https://relife-y0xi.onrender.com/swagger-ui/index.html
 
 ## Troubleshooting
 Slow / delayed responses — As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. 
+
 
