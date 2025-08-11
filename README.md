@@ -32,7 +32,7 @@ ReLife is a web-first platform to help producers, recyclers, and consumers meet 
 - Gamified incentives (Eco-Points) and blockchain-backed badges (proof-of-progress)
 - Circular marketplace for certified refurbished electronics
 - RAG AI agent assistant (in-browser capabilities)
-- In-browser image classification (ml5 / TensorFlow) and OCR (tesseract.js)
+- In-browser e-waste image classification (ml5 / TensorFlow) and OCR (tesseract.js)
 - EPR & impact dashboards (real-time analytics)
 - Accessibility: WCAG 2.2 aligned features
 - Sonarcloud for realtime comprehensive scanning of code to identify vulnerabilities, bugs and code smells
@@ -93,6 +93,7 @@ https://relife-y0xi.onrender.com/swagger-ui/index.html
 
 ## Troubleshooting
 Slow / delayed responses — As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. 
+
 
 
 
