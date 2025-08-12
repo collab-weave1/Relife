@@ -34,7 +34,7 @@ public class RecyclerController {
         return ResponseEntity.ok(recyclerService.createPickup(dto));
     }
 
-    @GetMapping("/")
+    @GetMapping("/user")
     public ResponseEntity<List<Pickup>> getAllPickups() {
         return ResponseEntity.ok(recyclerService.getAllPickups());
     }

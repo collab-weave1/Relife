@@ -226,7 +226,7 @@ export const fetchAdminStats = async () => {
 
 export const fetchRecyclerData = async () => {
     try {
-        const response = await api.get("/api/pickups");
+        const response = await api.get("/api/pickups/user");
         return {
             success: true,
             message: response
@@ -243,7 +243,8 @@ export const fetchRecyclerData = async () => {
 export const userPickup = async ({userID}) => {
     try {
         const response = api
-            .get(`/api/pickups/user/${userID}`)
+            .get(`/api/pickups/`)
+            // .get(`/api/pickups/user/${userID}`)
         return {
             success: true,
             message: response

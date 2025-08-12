@@ -11,4 +11,5 @@ import com.ReLife.model.Pickup;
 public interface PickupRepository extends JpaRepository<Pickup, Long> {
     List<Pickup> findByStatus(String status);
     List<Pickup> findByUserId(String userId);
+	boolean existsByUserId(String userId);
 }

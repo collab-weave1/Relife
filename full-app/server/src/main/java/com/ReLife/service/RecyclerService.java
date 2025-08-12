@@ -1,6 +1,7 @@
 package com.ReLife.service;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -71,6 +72,11 @@ public class RecyclerService {
     }
 
     public List<Pickup> getPickupsByUser(String userId) {
+    	boolean exists = pickupRepository.existsByUserId(userId);
+    	
+    	if(!exists) {
+			return Collections.emptyList();
+    	}
         return pickupRepository.findByUserId(userId);
     }
 
