@@ -58,7 +58,7 @@ export const About = ({ isDark }) => {
         {
             icon: Award,
             title: 'Innovation Award',
-            description: 'Winner of Tech for Good Hackathon 2024',
+            description: 'Winner of Tech for Good Award',
             gradient: 'from-yellow-500 to-orange-500'
         },
         {
@@ -114,15 +114,15 @@ export const About = ({ isDark }) => {
                             </div>
 
                             <div className="prose prose-lg max-w-none">
-                                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                                    ReLife was born from a simple yet powerful idea during a hackathon:
-                                    <span className="font-semibold text-emerald-600 dark:text-emerald-400"> every electronic device deserves a second life</span>.
+                            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                                    ReLife was born from a simple yet powerful idea during an event:
+                                    <span className="font-semibold text-emerald-600 dark:text-emerald-400"> Innovate for Nature</span>.
                                     What started as a project has evolved into a comprehensive platform that's reshaping
                                     how we think about electronic waste.
                                 </p>
 
                                 <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                                    We recognized that the e-waste challenge isn't just about recycling—it's about creating
+                                    We recognized that the e-waste challenge isn't just about recycling, it's about creating
                                     connections. Our platform bridges the gap between consumers who want to dispose responsibly,
                                     recyclers who need steady supply chains, and brands committed to circular economy principles.
                                     Through technology, gamification, and community building, we're making sustainable choices
