@@ -10,5 +10,5 @@ jobs:
     steps:
       - name: Ping backend warmup
         run: |
-          echo "Pinging warmup..."
+          echo "Pinging warmup... "
           curl -m 10 -sSf https://relife-y0xi.onrender.com/api/warmup || echo "ping-failed"
