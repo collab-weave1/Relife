@@ -188,7 +188,7 @@ export const handlePayment = async (ngo) => {
 export const submitForm = async (formData) => {
     try {
         if (formData.device && formData.brand && formData.location && formData.preferredTime) {
-            await api.post(`/api/pickups`, formData)
+            await api.post(`/api/pickups/`, formData)
             return {
                 success: true,
                 message: 'Request submitted successfully'

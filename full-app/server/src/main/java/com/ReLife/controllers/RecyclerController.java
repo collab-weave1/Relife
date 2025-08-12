@@ -29,12 +29,12 @@ public class RecyclerController {
         this.recyclerService = recyclerService;
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<Pickup> createPickup(@RequestBody PickupRequestDto dto) {
         return ResponseEntity.ok(recyclerService.createPickup(dto));
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<Pickup>> getAllPickups() {
         return ResponseEntity.ok(recyclerService.getAllPickups());
     }
