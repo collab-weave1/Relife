@@ -25,11 +25,13 @@ public class CorsConfig {
 						.allowCredentials(true)
 						.maxAge(3600);
 
-//				registry
-//						.addMapping("/api/**").allowedOriginPatterns("*")
-//						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-//						.allowedHeaders("*")
-//						.allowCredentials(false).maxAge(3600);
+				registry
+						.addMapping("/api/payment/**")
+						.allowedOriginPatterns("*")
+						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+						.allowedHeaders("*")
+						.allowCredentials(false)
+						.maxAge(3600);
 
 				registry.addMapping("/actuator/**")
 						.allowedOriginPatterns("http://localhost:8080", "http://localhost:3000",
