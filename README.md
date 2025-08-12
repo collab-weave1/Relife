@@ -87,8 +87,8 @@ https://relife-y0xi.onrender.com/swagger-ui/index.html
 This reduces payload sizes for common content types, improving load times and bandwidth usage.
 
 ## Deployment
-- **Server:** Render (recommended for quick deploys)
-- **Client:** Netlify — used for live/demo builds
+- **Server:** Render (for quick deploys)
+- **Client:** Netlify (for live/demo builds)
 - **Database:** Aiven (managed MySQL)
 - **Sonarcloud and GitHub Actions for CI/CD:** run tests, lint, build images
 
@@ -98,6 +98,7 @@ This reduces payload sizes for common content types, improving load times and ba
 
 ## Troubleshooting
 Slow / delayed responses — As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. 
+
 
 
 
