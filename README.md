@@ -102,11 +102,6 @@ The React app uses Vite for faster builds and optimized production bundling, res
 We use GitHub Actions to run a scheduled workflow every 5 minutes that pings the backend’s `/api/warmup` endpoint. This keeps the Render backend instance awake by preventing it from spinning down due to inactivity, thus avoiding cold starts and reducing initial request delays (~50s).
 
 ## Automation
-### GitHub Actions CI/CD:
-Automated workflows run on push or pull requests to:
-- Build and test frontend/backend code
-- Run static code analysis with SonarCloud
-- Build and push Docker images for deployment
 
 ### Keepalive Workflow:
 A scheduled GitHub Actions job triggers every 5 minutes, sending a lightweight curl request to the backend warmup endpoint. This keeps the Render backend instance awake by preventing idle timeouts, ensuring consistent performance for users.
@@ -121,8 +116,4 @@ A scheduled GitHub Actions job triggers every 5 minutes, sending a lightweight c
 - SonarCloud integration via Maven plugin (configured in pom.xml) for vulnerability & code smell scanning. Ensure Sonar token is configured in CI.
 
 ## Troubleshooting
-Slow / delayed responses — As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. 
-
-
-
-
+Slow / delayed responses — As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. However. I have added a GitHub Actions job `Keep Backend Awake` to prevent it from spining down due to inactivity
