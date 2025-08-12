@@ -15,7 +15,7 @@ import logo from '../assets/recycle-leaf.png'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
 
-const Navbar = ({ onLogout, onDarkToggle, isDark }) => {
+const Navbar = ({ sidebarOpen, onLogout, onDarkToggle, isDark }) => {
     const [isCollapsed, setIsCollapsed] = useState(true);
     const [activeItem, setActiveItem] = useState('dashboard');
 
@@ -54,14 +54,14 @@ const Navbar = ({ onLogout, onDarkToggle, isDark }) => {
                     <div className="flex justify-between items-center">
                         <div className="flex items-center space-x-4">
 
-                            {isAuthenticated && <button
+                            {sidebarOpen && <button
                                 onClick={() => setIsCollapsed(!isCollapsed)}
                                 className="md:hidden text-white hover:bg-white/20 p-2 rounded-lg"
                             >
                                 <Menu className="w-6 h-6" />
                             </button>}
 
-                            {isAuthenticated && <button
+                            {sidebarOpen && <button
                                 onClick={() => setIsCollapsed(!isCollapsed)}
                                 className="hidden md:block text-white hover:bg-white/20 p-2 rounded-lg"
                             >
@@ -74,7 +74,7 @@ const Navbar = ({ onLogout, onDarkToggle, isDark }) => {
 
                             <div>
                                 <h1 className="text-2xl font-bold text-white">ReLife</h1>
-                                {isAuthenticated && <p className="text-green-100 text-sm">{roleLabel}</p>}
+                                {sidebarOpen && <p className="text-green-100 text-sm">{roleLabel}</p>}
                             </div>
                         </div>
 
@@ -88,7 +88,7 @@ const Navbar = ({ onLogout, onDarkToggle, isDark }) => {
                 </div>
             </nav>
 
-            {isAuthenticated && isCollapsed && (
+            {sidebarOpen && isCollapsed && (
                 <div className="md:hidden bg-white dark:bg-gray-800 shadow-lg fixed top-20 left-0 right-0 z-40">
                     <div className="p-4">
                         <button
@@ -121,8 +121,7 @@ const Navbar = ({ onLogout, onDarkToggle, isDark }) => {
                         <button
                             onClick={
                                 ()=>{
-                                    onLogout()
-                                    onNavigate("/login")
+                                    onLogout().then(onNavigate("/login"))
                                 }
                             }
                             className="flex items-center w-full px-4 py-3 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg"
@@ -134,7 +133,7 @@ const Navbar = ({ onLogout, onDarkToggle, isDark }) => {
                 </div>
             )}
 
-            {isAuthenticated && 
+            {sidebarOpen && 
             (<div className={`${isCollapsed ? 'w-20' : 'w-64'
                     } transition-all duration-300 bg-white dark:bg-gray-900 shadow-lg border-r border-gray-200 dark:border-gray-700 flex-col fixed left-0 top-20 bottom-0 z-30 hidden md:flex`}
             >
@@ -187,8 +186,7 @@ const Navbar = ({ onLogout, onDarkToggle, isDark }) => {
                     <button
                         onClick={
                             ()=>{
-                                onLogout()
-                                onNavigate("/login")
+                                onLogout().then(onNavigate("/login"))
                             }
                         }
                         className={`w-full flex items-center ${isCollapsed ? 'justify-center' : 'justify-start'

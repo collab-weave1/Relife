@@ -23,9 +23,13 @@ const PrivateRoute = ({ children, requiredRole }) => {
 
   const { user, role, loading } = useAuth();
 
-  if (loading) return <div className="flex items-center justify-center h-full">Loading...</div>;
+  if (loading) {
+    return <div className="flex items-center justify-center h-full">Loading...</div>;
+  }
   
-  if (!user) return <Navigate to="/login" replace />;
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
   
   if (requiredRole && role && role !== requiredRole) {
     return <Navigate to={`/${role}`} replace />;
@@ -38,15 +42,15 @@ const App = () => {
   const { role, signOut } = useAuth();
   const [currentUser, setCurrentUser] = useState(null);
   const [isDark, setIsDark] = useState(false);
-  // const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogin = (role) => {
     setCurrentUser({ role });
-    // setSidebarOpen(true)
+    setSidebarOpen(true)
   }
   const handleLogout = async () => {
     setCurrentUser(null);
-    // setSidebarOpen(false);
+    setSidebarOpen(false);
     await signOut();
   }
 
@@ -55,6 +59,7 @@ const App = () => {
       <Router>
         <Navbar
           // role={currentUser?.role}
+          sidebarOpen={sidebarOpen}
           role={role}
           isDark={isDark}
           onDarkToggle={() => setIsDark(!isDark)}

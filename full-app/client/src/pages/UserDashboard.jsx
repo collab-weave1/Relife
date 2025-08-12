@@ -286,7 +286,7 @@ export const UserDashboard = ({ onLogout, isDark }) => {
                   <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Value</p>
                   <p className="text-3xl font-bold text-green-600 dark:text-green-400">₹{totalValue.toLocaleString()}</p>
                 </div>
-                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xl rounded-full flex items-center justify-center pl-2">
+                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xl rounded-full flex items-center justify-center pl-2">
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
@@ -416,7 +416,7 @@ export const UserDashboard = ({ onLogout, isDark }) => {
                     Track your environmental impact and earnings
                   </p>
                 </div>
-                <ExportButtons />
+                {/* <ExportButtons /> */}
               </div>
             </div>
             <div className="p-6">

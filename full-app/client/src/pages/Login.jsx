@@ -61,7 +61,8 @@ export const Login = ({ onLogin, isDark }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    if (!validateForm()) 
+      return;
   
     setIsLoading(true);
     setErrors({});
