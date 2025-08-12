@@ -81,6 +81,11 @@ https://relife-y0xi.onrender.com/swagger-ui/index.html
 ```
 (Adjust host if running locally.)
 
+## Performance Optimization
+
+- **Server Compression Enabled:** HTTP response compression is enabled on the backend to improve performance.
+This reduces payload sizes for common content types, improving load times and bandwidth usage.
+
 ## Deployment
 - **Server:** Render (recommended for quick deploys)
 - **Client:** Netlify — used for live/demo builds
@@ -93,6 +98,7 @@ https://relife-y0xi.onrender.com/swagger-ui/index.html
 
 ## Troubleshooting
 Slow / delayed responses — As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. 
+
 
 
 
