@@ -57,7 +57,7 @@ ReLife is a web-first platform to help producers, recyclers, and consumers meet 
 - Redis (cache)
 - Spring Security
 - Swagger (springdoc-openapi)
-- Razorpay (payments)
+- Razorpay (payments) for donations in `About` section
 - Dockerized services
 
 ### Other
@@ -106,6 +106,7 @@ The React app uses Vite for faster builds and optimized production bundling, res
 
 ## Troubleshooting
 Slow / delayed responses — As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. 
+
 
 
 
