@@ -106,6 +106,9 @@ We use GitHub Actions to run a scheduled workflow every 5 minutes that pings the
 ### Keepalive Workflow:
 A scheduled GitHub Actions job triggers every 5 minutes, sending a lightweight curl request to the backend warmup endpoint. This keeps the Render backend instance awake by preventing idle timeouts, ensuring consistent performance for users.
 
+### failsafe measure
+A job is also scheduled in cron-job.org to reduce single point of failure
+
 ### Benefits:
 - Reduced latency from cold starts on serverless platforms
 - Automated quality checks improve reliability and security
@@ -118,4 +121,5 @@ A scheduled GitHub Actions job triggers every 5 minutes, sending a lightweight c
 ## Troubleshooting
 Slow / delayed responses — 
 As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. However, I have added a GitHub Actions job `Keep Backend Awake` to prevent it from spining down due to inactivity
+
 
