@@ -10,8 +10,6 @@ EPR compliance platform. Scalable Web Platform for E-Waste Management & Circular
 
 - **Swagger / API docs**: [https://relife-y0xi.onrender.com/swagger-ui/index.html]
 
-> **Note:** The backend instance may spin down with inactivity (render/Aiven), which can delay requests by ~50s or more.
-
 ## Table of Contents
 1. [Overview](#overview)
 2. [Key Features](#key-features)
@@ -20,8 +18,9 @@ EPR compliance platform. Scalable Web Platform for E-Waste Management & Circular
 5. [Architecture Overview](#architecture-overview)
 6. [API Documentation](#api-documentation)
 7. [Deployment](#deployment)
-8. [Testing and Code Quality](#testing-and-code-quality)
-9. [Troubleshooting](#troubleshooting)
+8. [Automation](#automation)
+9. [Testing and Code Quality](#testing-and-code-quality)
+10. [Troubleshooting](#troubleshooting)
 
 ## Overview
 
@@ -98,7 +97,24 @@ The React app uses Vite for faster builds and optimized production bundling, res
 - **Server:** Render (for quick deploys)
 - **Client:** Netlify (for live/demo builds)
 - **Database:** Aiven (managed MySQL)
-- **Sonarcloud and GitHub Actions for CI/CD:** run tests, lint, build images
+- **Sonarcloud:** run tests, lint, build images
+- **GitHub Actions for CI/CD & Keepalive:**
+We use GitHub Actions to run a scheduled workflow every 5 minutes that pings the backend’s `/api/warmup` endpoint. This keeps the Render backend instance awake by preventing it from spinning down due to inactivity, thus avoiding cold starts and reducing initial request delays (~50s).
+
+## Automation
+### GitHub Actions CI/CD:
+Automated workflows run on push or pull requests to:
+- Build and test frontend/backend code
+- Run static code analysis with SonarCloud
+- Build and push Docker images for deployment
+
+### Keepalive Workflow:
+A scheduled GitHub Actions job triggers every 5 minutes, sending a lightweight curl request to the backend warmup endpoint. This keeps the Render backend instance awake by preventing idle timeouts, ensuring consistent performance for users.
+
+### Benefits:
+- Reduced latency from cold starts on serverless platforms
+- Automated quality checks improve reliability and security
+- Streamlined deployments minimize manual overhead
 
 ## Testing and Code Quality
 - Frontend linting: eslint.
@@ -106,10 +122,6 @@ The React app uses Vite for faster builds and optimized production bundling, res
 
 ## Troubleshooting
 Slow / delayed responses — As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. 
-
-
-
-
 
 
 
