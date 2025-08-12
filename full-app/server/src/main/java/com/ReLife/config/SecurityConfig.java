@@ -28,9 +28,9 @@ public class SecurityConfig {
 					"/api/warmup/**",
             		"/actuator/**",
             		"swagger-ui/**",
-                    "/v3/api-docs/**",    // allow OpenAPI JSON
-                    "/swagger-ui.html",   // older redirect
-                    "/webjars/**",        // static assets if used
+                    "/v3/api-docs/**",    
+                    "/swagger-ui.html",   
+                    "/webjars/**",        // static assets 
                     "/favicon.ico"
             	).permitAll()
             .anyRequest().authenticated()

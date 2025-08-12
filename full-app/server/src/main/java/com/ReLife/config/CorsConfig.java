@@ -12,56 +12,53 @@ public class CorsConfig {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				
-				registry.addMapping("/api/**")
-						.allowedOriginPatterns("http://localhost:8080",
-								"http://localhost:3000", 
-								"http://localhost:5173",
-								"https://relife-y0xi.onrender.com")
+
+//				registry.addMapping("/api/**")
+//						.allowedOriginPatterns("http://localhost:8080",
+//								"http://localhost:3000", 
+//								"http://localhost:5173",
+//								"https://relife-ecycle.netlify.app",
+//								"https://relife-ecycle-live.netlify.app",
+//								"https://relife-y0xi.onrender.com")
+//						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+//						.allowedHeaders("*")
+//						.allowCredentials(true)
+//						.maxAge(3600);
+
+				registry
+						.addMapping("/api/**").allowedOriginPatterns("*")
 						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
 						.allowedHeaders("*")
-						.allowCredentials(true)
-						.maxAge(3600);
+						.allowCredentials(false).maxAge(3600);
 
 				registry.addMapping("/actuator/**")
-						.allowedOriginPatterns("http://localhost:8080",
-								"http://localhost:3000", 
-								"http://localhost:5173",
-								"https://relife-y0xi.onrender.com")
-						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-						.allowedHeaders("*")
-						.allowCredentials(true)
-						.maxAge(3600);
-				
+						.allowedOriginPatterns("http://localhost:8080", "http://localhost:3000",
+								"http://localhost:5173", "https://relife-ecycle.netlify.app",
+								"https://relife-ecycle-live.netlify.app", "https://relife-y0xi.onrender.com")
+						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS").allowedHeaders("*")
+						.allowCredentials(true).maxAge(3600);
+
 				registry.addMapping("/swagger-ui/**")
-					.allowedOriginPatterns("http://localhost:8080",
-							"http://localhost:3000", 
-							"http://localhost:5173",
-							"https://relife-y0xi.onrender.com")
-					.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-					.allowedHeaders("*")
-					.allowCredentials(true)
-					.maxAge(3600);
-				
+						.allowedOriginPatterns("http://localhost:8080", "http://localhost:3000",
+								"http://localhost:5173", "https://relife-ecycle.netlify.app",
+								"https://relife-ecycle-live.netlify.app", "https://relife-y0xi.onrender.com")
+						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS").allowedHeaders("*")
+						.allowCredentials(true).maxAge(3600);
+
 				registry.addMapping("/v3/api-docs/**")
-				.allowedOriginPatterns("http://localhost:8080",
-						"http://localhost:3000", 
-						"http://localhost:5173",
-						"https://relife-y0xi.onrender.com")
-				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-				.allowedHeaders("*")
-				.allowCredentials(true)
-				.maxAge(3600);
-				
+						.allowedOriginPatterns("http://localhost:8080", "http://localhost:3000",
+								"http://localhost:5173", "https://relife-ecycle.netlify.app",
+								"https://relife-ecycle-live.netlify.app", "https://relife-y0xi.onrender.com")
+						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS").allowedHeaders("*")
+						.allowCredentials(true).maxAge(3600);
+
 				registry.addMapping("/webjars/**")
-				.allowedOriginPatterns("http://localhost:8080", 
-						"http://localhost:5173",
-						"https://relife-y0xi.onrender.com")
-				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-				.allowedHeaders("*")
-				.allowCredentials(true)
-				.maxAge(3600);
-		
+						.allowedOriginPatterns("http://localhost:8080", "http://localhost:5173",
+								"https://relife-ecycle.netlify.app", "https://relife-ecycle-live.netlify.app",
+								"https://relife-y0xi.onrender.com")
+						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS").allowedHeaders("*")
+						.allowCredentials(true).maxAge(3600);
+
 			}
 		};
 	}
