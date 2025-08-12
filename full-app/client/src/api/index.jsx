@@ -188,7 +188,7 @@ export const handlePayment = async (ngo) => {
 export const submitForm = async (formData) => {
     try {
         if (formData.device && formData.brand && formData.location && formData.preferredTime) {
-            await api.post(`/api/pickup`, formData)
+            await api.post(`/api/pickups`, formData)
             return {
                 success: true,
                 message: 'Request submitted successfully'
@@ -240,10 +240,10 @@ export const fetchRecyclerData = async () => {
     }
 }
 
-export const userPickup = async () => {
+export const userPickup = async ({userID}) => {
     try {
         const response = api
-            .get(`/pickup/user`)
+            .get(`/api/pickups/user/${userID}`)
         return {
             success: true,
             message: response

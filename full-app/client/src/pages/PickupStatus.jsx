@@ -16,7 +16,7 @@ export const PickupStatus = ({ isDark }) => {
   const [statusList, setStatusList] = useState([]);
 
   useEffect(() => {
-    userPickup()
+    userPickup(1)
     .then(setStatusList)
     .catch(console.error);
   }, []);

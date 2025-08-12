@@ -12,7 +12,7 @@ public class Pickup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+//    @NotBlank
     private String userId;
 
     @NotBlank
@@ -27,10 +27,10 @@ public class Pickup {
     @NotBlank
     private String preferredTime;
 
-    @NotBlank
+//    @NotBlank
     private String status;
 
-    @NotBlank
+//    @NotBlank
     private String submittedDate;
 
     private Double value; 

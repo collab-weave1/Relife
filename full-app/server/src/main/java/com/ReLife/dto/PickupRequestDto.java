@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public class PickupRequestDto {
 
-    @NotBlank
+//    @NotBlank
     private String userId;
     
     @NotBlank
@@ -19,10 +19,10 @@ public class PickupRequestDto {
     @NotBlank
     private String preferredTime;
     
-    @NotBlank
+//    @NotBlank
     private String status;
     
-    @NotBlank
+//    @NotBlank
     private String submittedDate;
     
     private Double value;
