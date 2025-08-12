@@ -114,6 +114,17 @@ A job is also scheduled in cron-job.org to reduce single point of failure
 - Automated quality checks improve reliability and security
 - Streamlined deployments minimize manual overhead
 
+## Screenshots
+### Sonarcloud
+<img width="1918" height="1015" alt="sonarcloud" src="https://github.com/user-attachments/assets/3d028918-8007-44b7-8663-3285dde9ee37" />
+
+### Swagger (OpenAPI)
+<img width="1920" height="1017" alt="swagger" src="https://github.com/user-attachments/assets/9812298c-84ea-4a90-b412-1463b52c1d02" />
+
+## Demo Video
+
+[https://youtu.be/RRAVT99xrs8]
+
 ## Testing and Code Quality
 - Frontend linting: eslint.
 - SonarCloud integration via Maven plugin (configured in pom.xml) for vulnerability & code smell scanning.
@@ -121,6 +132,7 @@ A job is also scheduled in cron-job.org to reduce single point of failure
 ## Troubleshooting
 Slow / delayed responses — 
 As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. However, I have added a GitHub Actions job `Keep Backend Awake` to prevent it from spining down due to inactivity
+
 
 
 
