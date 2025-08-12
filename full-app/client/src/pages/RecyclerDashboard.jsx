@@ -378,7 +378,7 @@ export const RecyclerDashboard = () => {
                           </p>
                         </div>
                         <p className="text-sm font-semibold text-green-600 dark:text-green-400 mt-1">
-                          Value: ₹{request.value.toLocaleString()}
+                          Value: ₹{typeof request?.value === 'number' ? request.value.toLocaleString() : '-'}
                         </p>
                       </div>
                     </div>
