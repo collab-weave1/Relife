@@ -25,6 +25,7 @@ public class SecurityConfig {
             		"/api/payment/**",
             		"/api/admin/**",
             		"/api/pickups/**",
+					"/api/warmup/**",
             		"/actuator/**",
             		"swagger-ui/**",
                     "/v3/api-docs/**",    // allow OpenAPI JSON
