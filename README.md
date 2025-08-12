@@ -86,6 +86,14 @@ https://relife-y0xi.onrender.com/swagger-ui/index.html
 - **Server Compression Enabled:** HTTP response compression is enabled on the backend to improve performance.
 This reduces payload sizes for common content types, improving load times and bandwidth usage.
 
+- **Vite Build for React Frontend:**  
+The React app uses Vite for faster builds and optimized production bundling, resulting in improved frontend performance and faster reload times during development.
+
+- **Backend:** Dockerized Spring Boot application for consistent environment and easy deployment.
+
+- **Redis Caching:**  
+  Integrated Redis as a caching layer to accelerate data access, reduce database load, and improve overall application responsiveness. 
+
 ## Deployment
 - **Server:** Render (for quick deploys)
 - **Client:** Netlify (for live/demo builds)
@@ -98,6 +106,7 @@ This reduces payload sizes for common content types, improving load times and ba
 
 ## Troubleshooting
 Slow / delayed responses — As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. 
+
 
 
 
