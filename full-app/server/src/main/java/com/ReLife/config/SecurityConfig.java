@@ -25,6 +25,7 @@ public class SecurityConfig {
             		"/api/payment/**",
             		"/api/admin/**",
             		"/api/pickups/**",
+					"/api/progress/**",
 					"/api/warmup/**",
             		"/actuator/**",
             		"swagger-ui/**",
