@@ -116,4 +116,6 @@ A scheduled GitHub Actions job triggers every 5 minutes, sending a lightweight c
 - SonarCloud integration via Maven plugin (configured in pom.xml) for vulnerability & code smell scanning. Ensure Sonar token is configured in CI.
 
 ## Troubleshooting
-Slow / delayed responses — As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. However. I have added a GitHub Actions job `Keep Backend Awake` to prevent it from spining down due to inactivity
+Slow / delayed responses — 
+As backend is hosted on Render, it may spin down due to inactivity. First request may take up to ~50s. However, I have added a GitHub Actions job `Keep Backend Awake` to prevent it from spining down due to inactivity
+
