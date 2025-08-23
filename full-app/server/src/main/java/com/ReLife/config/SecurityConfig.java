@@ -23,6 +23,7 @@ public class SecurityConfig {
             .requestMatchers(
             		"/api/auth/**", 
             		"/api/payment/**",
+            		"/api/pvt-payment/**",
             		"/api/admin/**",
             		"/api/pickups/**",
             		"/api/pickup/**",
